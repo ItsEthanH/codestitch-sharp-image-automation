@@ -10,6 +10,8 @@ A tool that renders your [CodeStitch](https://codestitch.app/app) website and au
 4. Preserves image classes, alt text, and other attributes
 5. Works seamlessly with 11ty/Nunjucks templates and CodeStitch Sharp Images plugin
 6. Allows targeting specific pages for optimization
+7. Adds `fetchpriority="high"` to above-fold images for improved performance
+8. Skips already-optimized images with `--skip` flag to avoid re-processing
 
 ## Install
 
@@ -46,6 +48,7 @@ Options:
   --content-dir DIR    Directory containing HTML/Nunjucks content files (default: ./src/content)
   --target PAGE        Specific page to optimize (e.g., home, about, services/service-name)
   --skinny FORMAT      Generate slim markup with only one optimized format (avif or webp)
+  --skip               Skip <picture> elements that already have optimized <source> children
   --help, -h           Show this help message
 ```
 
@@ -72,6 +75,12 @@ npx run-sharp-automation --target services/tile-installation
 
 # Combine flags
 npx run-sharp-automation --target home --skinny avif
+
+# Skip already-optimized images (useful when re-running on partially optimized projects)
+npx run-sharp-automation --skip
+
+# Skip optimized + target specific page
+npx run-sharp-automation --skip --target about
 ```
 
 > [!IMPORTANT]
@@ -96,8 +105,10 @@ The tool performs the following steps:
    - Appropriate `srcset` attributes for modern formats (avif, webp, jpeg)
    - **Skinny mode** (`--skinny`): Generates only one optimized format per breakpoint instead of three, reducing markup by 67%
    - Preload links for above-the-fold images to improve page load performance
+   - `fetchpriority="high"` on above-the-fold images to signal high fetch priority to the browser
    - No `loading="lazy"` attribute for above-the-fold images (added to below-fold images)
    - All other original attributes (class, alt, etc.) preserved
+   - **Skip mode** (`--skip`): Skips images that already have optimized `<source>` elements, useful when re-running on partially optimized projects
 5. **Output**: Saves the generated markup to files in the output directory, organized by page
    - Each file is named based on the page's permalink (e.g., `about.html`, `blog-post-1.html`)
    - This naming convention ensures unique filenames for each page, even with nested routes
