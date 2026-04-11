@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Skip Page</title>
+	<style>
+		.cs-picture {
+			display: block;
+			width: 400px;
+			height: 300px;
+		}
+		.cs-picture img {
+			display: block;
+			width: 400px;
+			height: 300px;
+		}
+	</style>
+</head>
+<body>
+	<!-- Already optimized: typed <source> -->
+	<picture class="cs-picture">
+		<source media="(max-width: 600px)" srcset="/assets/images/optimized.avif" type="image/avif">
+		<img src="/assets/images/optimized.jpg" alt="already optimized" width="400" height="300">
+	</picture>
+	<!-- Art-direction only: <source> but no type -->
+	<picture class="cs-picture">
+		<source media="(max-width: 600px)" srcset="/assets/images/art-mobile.jpg">
+		<img src="/assets/images/art.jpg" alt="art direction" width="400" height="300">
+	</picture>
+	<!-- Plain unoptimized -->
+	<picture class="cs-picture">
+		<img src="/assets/images/plain.jpg" alt="plain image" width="400" height="300">
+	</picture>
+</body>
+</html>

@@ -7,8 +7,9 @@
 		"run-sharp-automation": "./bin/index.js"
 	},
 	"scripts": {
-		"test": "node ./bin/index.js",
-		"test:home": "node ./bin/index.js --target Home"
+		"test": "jest",
+		"run:all": "node ./bin/index.js",
+		"run:home": "node ./bin/index.js --target Home"
 	},
 	"repository": {
 		"type": "git",
@@ -30,6 +31,9 @@
 	"dependencies": {
 		"js-yaml": "^4.1.0",
 		"playwright-chromium": "^1.42.1"
+	},
+	"devDependencies": {
+		"jest": "^29.0.0"
 	},
 	"engines": {
 		"node": ">=14.0.0"

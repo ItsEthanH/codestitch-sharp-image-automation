@@ -14,6 +14,7 @@ const options = {
 	targetPage: null,
 	skinny: false,
 	skinnyFormat: null,
+	skipOptimized: false,
 };
 
 // Parse command line arguments
@@ -40,6 +41,8 @@ for (let i = 0; i < args.length; i++) {
 			console.error(`Error: --skinny format must be either "avif" or "webp", got "${args[i + 1]}"`);
 			process.exit(1);
 		}
+	} else if (args[i] === "--skip") {
+		options.skipOptimized = true;
 	} else if (args[i] === "--help" || args[i] === "-h") {
 		console.log(`
 CodeStitch Image Optimizer
@@ -55,6 +58,7 @@ Options:
   --content-dir DIR      Directory containing HTML/Nunjucks content files (default: ./src/content)
   --target PAGE          Specific page to optimize (e.g., home, about, services/tile-installation)
   --skinny FORMAT        Generate slim markup with only one optimized format (avif or webp)
+  --skip                 Skip <picture> elements that already have typed <source> children (already optimized)
   --help, -h             Show this help message
 
 Examples:
