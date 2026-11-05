@@ -116,4 +116,4 @@ The tool performs the following steps:
 
 ## Requirements
 
-- Node.js >=14.0.0
+- Node.js >=20.0.0
